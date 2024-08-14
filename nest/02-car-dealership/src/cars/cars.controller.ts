@@ -4,14 +4,15 @@ import {
   Delete,
   Get,
   Param,
-  ParseIntPipe,
+  ParseUUIDPipe,
   Patch,
   Post,
 } from '@nestjs/common';
 import { CarsService } from './cars.service';
-import { Car } from './car.interface';
+import { CreateCarDto, UpdateCarDto } from './dto';
 
 @Controller('cars')
+// @UsePipes(ValidationPipe) // --> UsePipes can be used at method, controller or application level
 export class CarsController {
   constructor(private readonly service: CarsService) {}
 
@@ -22,26 +23,28 @@ export class CarsController {
   }
 
   @Get('/:id')
-  getById(@Param('id', ParseIntPipe) id: number) {
-    console.log({ id });
-
-    // throw new Error('Error'); // --> return 500 error
-
+  // new ParseUUIDPipe({ version: '4' }) --> we can specify uuid version for ParseUUIDPipe
+  getById(@Param('id', ParseUUIDPipe) id: string) {
+    // console.log({ id });
     return this.service.findById(id);
   }
 
   @Post()
-  create(@Body() body: Car) {
-    return body;
+  // @UsePipes(ValidationPipe)
+  create(@Body() createCarDto: CreateCarDto) {
+    return this.service.create(createCarDto);
   }
 
-  @Patch()
-  update(@Param('id', ParseIntPipe) id: number, @Body() body: Car) {
-    return body;
+  @Patch('/:id')
+  update(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() updateCarDto: UpdateCarDto,
+  ) {
+    return this.service.update(id, updateCarDto);
   }
 
-  @Delete()
-  remove(@Param('id', ParseIntPipe) id: number) {
-    return id;
+  @Delete('/:id')
+  remove(@Param('id', ParseUUIDPipe) id: string) {
+    return this.service.delete(id);
   }
 }
