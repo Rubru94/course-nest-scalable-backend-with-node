@@ -58,6 +58,31 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## Run dev environment
+
+1. Clone repository
+2. Run
+   
+   ```bash
+   $ npm install
+   ```
+3. Nest CLI installed
+
+   ```bash
+   $ npm i -g @nestjs/cli
+   ```
+
+4. Run database
+
+   ```bash
+   $ docker compose up -d
+   ```
+
+## Stack
+
+- MongoDB
+- Nest
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
