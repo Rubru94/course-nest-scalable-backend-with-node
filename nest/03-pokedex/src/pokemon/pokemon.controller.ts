@@ -15,11 +15,6 @@ import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 export class PokemonController {
   constructor(private readonly pokemonService: PokemonService) {}
 
-  @Post()
-  create(@Body() createPokemonDto: CreatePokemonDto) {
-    return this.pokemonService.create(createPokemonDto);
-  }
-
   @Get()
   findAll() {
     return this.pokemonService.findAll();
@@ -28,6 +23,11 @@ export class PokemonController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.pokemonService.findOne(+id);
+  }
+
+  @Post()
+  create(@Body() createPokemonDto: CreatePokemonDto) {
+    return this.pokemonService.create(createPokemonDto);
   }
 
   @Patch(':id')
