@@ -1,19 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
+import { Pokemon } from './entities/pokemon.entity';
 
 @Injectable()
 export class PokemonService {
-  create(createPokemonDto: CreatePokemonDto) {
-    return 'This action adds a new pokemon';
-  }
-
   findAll() {
     return `This action returns all pokemon`;
   }
 
   findOne(id: number) {
     return `This action returns a #${id} pokemon`;
+  }
+
+  create(createPokemonDto: CreatePokemonDto) {
+    return {
+      name: createPokemonDto.name.toLowerCase(),
+      no: createPokemonDto.no,
+    };
   }
 
   update(id: number, updatePokemonDto: UpdatePokemonDto) {
