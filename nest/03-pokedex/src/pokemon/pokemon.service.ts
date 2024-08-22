@@ -4,6 +4,7 @@ import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 import { Pokemon } from './entities/pokemon.entity';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
+import { ErrorHandler } from 'src/handlers';
 
 @Injectable()
 export class PokemonService {
@@ -23,9 +24,12 @@ export class PokemonService {
   async create(createPokemonDto: CreatePokemonDto) {
     createPokemonDto.name = createPokemonDto.name.toLowerCase();
 
-    const pokemon = await this.pokemonModel.create(createPokemonDto);
-
-    return pokemon;
+    try {
+      const pokemon = await this.pokemonModel.create(createPokemonDto);
+      return pokemon;
+    } catch (error) {
+      ErrorHandler.handleException(error);
+    }
   }
 
   update(id: number, updatePokemonDto: UpdatePokemonDto) {

@@ -88,3 +88,4 @@ $ npm run test:cov
 ## Bibliography
 
 - [Mongo connection](https://docs.nestjs.com/techniques/mongodb)
+- [HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)

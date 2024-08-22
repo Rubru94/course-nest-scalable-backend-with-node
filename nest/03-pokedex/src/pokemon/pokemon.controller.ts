@@ -26,6 +26,7 @@ export class PokemonController {
   }
 
   @Post()
+  // @HttpCode(HttpStatus.OK) // HttpCode --> custom http response
   create(@Body() createPokemonDto: CreatePokemonDto) {
     return this.pokemonService.create(createPokemonDto);
   }
