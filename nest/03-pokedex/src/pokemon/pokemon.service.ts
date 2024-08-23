@@ -1,10 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreatePokemonDto } from './dto/create-pokemon.dto';
-import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 import { Pokemon } from './entities/pokemon.entity';
 import { isValidObjectId, Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { ErrorHandler } from 'src/handlers';
+import { CreatePokemonDto, UpdatePokemonDto } from './dto';
 
 @Injectable()
 export class PokemonService {
@@ -52,11 +51,21 @@ export class PokemonService {
     }
   }
 
-  update(id: number, updatePokemonDto: UpdatePokemonDto) {
-    return `This action updates a #${id} pokemon`;
+  async update(term: string, updatePokemonDto: UpdatePokemonDto) {
+    const pokemon = await this.findOne(term);
+
+    if (updatePokemonDto.name)
+      updatePokemonDto.name = updatePokemonDto.name.toLowerCase();
+
+    try {
+      await pokemon.updateOne(updatePokemonDto, { new: true }); // { new: true } --> return new object
+      return { ...pokemon.toJSON(), ...updatePokemonDto };
+    } catch (error) {
+      ErrorHandler.handleException(error);
+    }
   }
 
-  remove(id: number) {
+  async remove(id: string) {
     return `This action removes a #${id} pokemon`;
   }
 }
