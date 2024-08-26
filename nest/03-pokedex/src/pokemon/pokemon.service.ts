@@ -6,7 +6,7 @@ import {
 import { Pokemon } from './entities/pokemon.entity';
 import { isValidObjectId, Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { ErrorHandler } from 'src/handlers';
+import { ErrorHandler } from 'src/common/handlers';
 import { CreatePokemonDto, UpdatePokemonDto } from './dto';
 
 @Injectable()
