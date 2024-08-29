@@ -11,7 +11,9 @@ export class ErrorHandler {
 
     if (code === ErrorHandler.DUPLICATE_KEY_ERROR_CODE) {
       throw new BadRequestException(
-        `Record exists in db: ${JSON.stringify(keyValue)}`,
+        keyValue
+          ? `Record exists in db: ${JSON.stringify(keyValue)}`
+          : (errorResponse.message ?? errorResponse.errmsg),
       );
     }
     throw new InternalServerErrorException(errorResponse.errmsg);
