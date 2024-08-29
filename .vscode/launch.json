@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Nest Framework",
+      "runtimeExecutable": "npm",
+      // "runtimeArgs": ["run", "start:debug", "--", "--inspect-brk"],
+      "runtimeArgs": ["run", "start:dev", "--", "--inspect-brk"], // using dev for connecting to database
+      "autoAttachChildProcesses": true,
+      "restart": true,
+      "sourceMaps": true,
+      "stopOnEntry": false,
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/nest/03-pokedex"
+    }
+  ]
+}
