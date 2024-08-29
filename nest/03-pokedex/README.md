@@ -78,6 +78,12 @@ $ npm run test:cov
    $ docker compose up -d
    ```
 
+5. Rebuilding database with the seed
+
+   ```bash
+   $ http://localhost:3000/api/v2/seed
+   ```
+
 ## Stack
 
 - MongoDB
@@ -90,3 +96,4 @@ $ npm run test:cov
 - [Mongo connection](https://docs.nestjs.com/techniques/mongodb)
 - [HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
 - [Klerith/nest-pokedex repo](https://github.com/Klerith/nest-pokedex/tree/fin-seccion-7)
+- [pokeapi](https://pokeapi.co/)
