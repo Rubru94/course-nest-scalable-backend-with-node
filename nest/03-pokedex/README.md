@@ -78,7 +78,13 @@ $ npm run test:cov
    $ docker compose up -d
    ```
 
-5. Rebuilding database with the seed
+5. Run app
+
+   ```bash
+   $ npm run start:dev
+   ```
+
+6. Rebuilding database with the seed
 
    ```bash
    $ http://localhost:3000/api/v2/seed
