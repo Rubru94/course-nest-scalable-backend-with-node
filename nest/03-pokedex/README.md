@@ -103,3 +103,4 @@ $ npm run test:cov
 - [HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
 - [Klerith/nest-pokedex repo](https://github.com/Klerith/nest-pokedex/tree/fin-seccion-7)
 - [pokeapi](https://pokeapi.co/)
+- [joi - schema description language and data validator for JavaScript](https://www.npmjs.com/package/joi)
