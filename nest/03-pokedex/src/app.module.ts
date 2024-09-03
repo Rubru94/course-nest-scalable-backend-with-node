@@ -4,12 +4,15 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { CommonModule } from './common/common.module';
+import { EnvConfiguration } from './config/env.config';
 import { PokemonModule } from './pokemon/pokemon.module';
 import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(), // env --> set as first import --> before other modules that use it
+    ConfigModule.forRoot({
+      load: [EnvConfiguration],
+    }), // env --> set as first import --> before other modules that use it
     ServeStaticModule.forRoot({ rootPath: join(__dirname, '..', 'public') }),
     MongooseModule.forRoot(process.env.MONGODB),
     PokemonModule,
@@ -21,6 +24,6 @@ import { SeedModule } from './seed/seed.module';
 })
 export class AppModule {
   constructor() {
-    console.log({ env: process.env });
+    // console.log({ env: process.env });
   }
 }

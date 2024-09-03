@@ -9,16 +9,29 @@ import { InjectModel } from '@nestjs/mongoose';
 import { ErrorHandler } from 'src/common/handlers';
 import { CreatePokemonDto, UpdatePokemonDto } from './dto';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class PokemonService {
+  private defaultSearchLimit: number;
+  private defaultSearchOffset: number;
+
   constructor(
     @InjectModel(Pokemon.name)
     private readonly pokemonModel: Model<Pokemon>,
-  ) {}
+    private readonly configService: ConfigService,
+  ) {
+    this.defaultSearchLimit =
+      this.configService.getOrThrow<number>('defaultLimit'); // handle error if env variable not exist
+    this.defaultSearchOffset =
+      this.configService.getOrThrow<number>('defaultOffset');
+  }
 
   findAll(paginationDto: PaginationDto) {
-    const { limit = 10, offset = 0 } = paginationDto;
+    const {
+      limit = this.defaultSearchLimit,
+      offset = this.defaultSearchOffset,
+    } = paginationDto;
 
     return this.pokemonModel
       .find()
