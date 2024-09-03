@@ -78,13 +78,17 @@ $ npm run test:cov
    $ docker compose up -d
    ```
 
-5. Run app
+5. Clone file ```.env.template``` & rename to ```.env```. 
+   
+6. Fill in environment variables in ```.env``` file.
+
+7. Run app
 
    ```bash
    $ npm run start:dev
    ```
 
-6. Rebuilding database with the seed
+8. Rebuilding database with the seed
 
    ```bash
    $ http://localhost:3000/api/v2/seed
