@@ -16,7 +16,9 @@ import { SeedModule } from './seed/seed.module';
       validationSchema: JoiValidationSchema,
     }), // env --> set as first import --> before other modules that use it
     ServeStaticModule.forRoot({ rootPath: join(__dirname, '..', 'public') }),
-    MongooseModule.forRoot(process.env.MONGODB),
+    MongooseModule.forRoot(process.env.MONGODB, {
+      dbName: process.env.DB_NAME,
+    }),
     PokemonModule,
     CommonModule,
     SeedModule,
