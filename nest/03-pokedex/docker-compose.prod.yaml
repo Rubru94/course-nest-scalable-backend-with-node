@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  pokedex-app:
+    depends_on:
+      - db
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pokedex-docker # Image name
+    container_name: pokedex-app
+    restart: always # restart the container if it stops
+    ports:
+      - '${PORT}:${PORT}'
+    # working_dir: /var/www/pokedex
+    environment: # Read from .env file by default, or env_file attribute
+      MONGODB: ${MONGODB}
+      PORT: ${PORT}
+      DEFAULT_SEARCH_LIMIT: ${DEFAULT_SEARCH_LIMIT}
+    # volumes:
+    #   - ./:/var/www/pokedex
+
+  db:
+    image: mongo:5
+    restart: always
+    container_name: mongo-db
+    ports:
+      - 27017:27017 # binding --> local port : container port
+    environment:
+      MONGOBD_DATABASE: pokemonsdb
+    volumes:
+      - ./mongo:/data/db # binding --> local dir : container dir

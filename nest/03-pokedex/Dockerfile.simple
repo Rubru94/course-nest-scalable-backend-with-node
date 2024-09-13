@@ -1,0 +1,26 @@
+# Image to use.
+FROM node:18-alpine3.15
+
+# Set working directory.
+RUN mkdir -p /var/www/pokedex # Create dir with parents (-p) if needed
+WORKDIR /var/www/pokedex
+
+# Copy dir & content. (Last param is always destination path).
+COPY . /var/www/pokedex
+# COPY package.json tsconfig.json tsconfig.build.json /var/www/pokedex/ # Copy specific files
+RUN npm install
+RUN npm run build
+
+# Set permissions to run app. It is good practice not to use the root user.
+RUN adduser --disabled-password pokeuser
+RUN chown -R pokeuser:pokeuser /var/www/pokedex
+USER pokeuser
+
+# Clean caché
+RUN npm cache clean --force
+
+# Expose container port
+EXPOSE 3000
+
+# By CMD commands are executed once the container has been initialised.
+CMD [ "npm", "run", "start" ]

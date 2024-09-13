@@ -8,6 +8,6 @@ services:
     ports:
       - 27017:27017 # binding --> local port : container port
     environment:
-      MONGOBD_DATABASE: nest-pokemon
+      MONGOBD_DATABASE: pokemonsdb
     volumes:
       - ./mongo:/data/db # binding --> local dir : container dir

@@ -94,6 +94,24 @@ $ npm run test:cov
    $ http://localhost:3000/api/v2/seed
    ```
 
+## Run prod environment
+
+1. Create file `.env.prod`
+   
+2. Fill in environment variables in ```.env.prod``` file.
+
+3. Create image
+
+   ```bash
+   $ docker compose -f docker-compose.prod.yaml --env-file .env.prod up -d
+   ```
+
+> [!NOTE]  
+> Use `--build` if you want to reconstruct the image, e.g. after changes.
+>```bash
+>$ docker compose -f docker-compose.prod.yaml --env-file .env.prod up -d --build
+>```
+
 ## Stack
 
 - MongoDB
@@ -108,3 +126,6 @@ $ npm run test:cov
 - [Klerith/nest-pokedex repo](https://github.com/Klerith/nest-pokedex/tree/fin-seccion-7)
 - [pokeapi](https://pokeapi.co/)
 - [joi - schema description language and data validator for JavaScript](https://www.npmjs.com/package/joi)
+- [railway - cloud infrastructure deployment platform ](https://railway.app/)
+- [Dockerfile & docker-compose.yaml](https://gist.github.com/Klerith/e7861738c93712840ab3a38674843490)
+- [Comandos RUN, CMD y ENTRYPOINT en Dockerfile](https://dockertips.com/comandos-run-cmd-y-entrypoint-en-el-dockerfile)
