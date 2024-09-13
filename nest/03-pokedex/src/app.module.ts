@@ -14,6 +14,7 @@ import { SeedModule } from './seed/seed.module';
     ConfigModule.forRoot({
       load: [EnvConfiguration],
       validationSchema: JoiValidationSchema,
+      envFilePath: `.env${process.env.NODE_ENV ? `.${process.env.NODE_ENV}` : ''}`, // multiple .env files config --> setting NODE_ENV= in package scripts --> similar to cross-env
     }), // env --> set as first import --> before other modules that use it
     ServeStaticModule.forRoot({ rootPath: join(__dirname, '..', 'public') }),
     MongooseModule.forRoot(process.env.MONGODB, {
