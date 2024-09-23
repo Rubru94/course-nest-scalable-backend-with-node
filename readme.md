@@ -84,10 +84,8 @@ Nest is an extensible, versatile and progressive node framework, which provides 
 The course is designed to help you get started in Nest and to improve your skills in this powerful framework, additionally it has a cheat-sheet customized by me to help you in your learning that you can print and share.
 
 
-# Bibliography
+## Bibliography
 
   - [Udemy Course - Nest: Desarrollo backend escalable con Node](https://www.udemy.com/course/nest-framework/?kw=nest+desarrollo&src=sac)
   - [Nestjs](https://docs.nestjs.com/)
   - [Recommended installations](https://gist.github.com/Klerith/c0ef4f48d986e2cf3308bb54fff84ea5)
-  - [nest-typescript-intro](https://github.com/Klerith/nest-typescript-intro)
-  - [nest-car-dealership project](https://github.com/Klerith/nest-car-dealership/tree/main)
