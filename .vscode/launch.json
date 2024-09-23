@@ -2,9 +2,9 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "03-pokedex - Debug Nest Framework",
       "type": "node",
       "request": "launch",
-      "name": "Debug Nest Framework",
       "runtimeExecutable": "npm",
       // "runtimeArgs": ["run", "start:debug", "--", "--inspect-brk"],
       "runtimeArgs": ["run", "start:dev", "--", "--inspect-brk"], // using dev for connecting to database
