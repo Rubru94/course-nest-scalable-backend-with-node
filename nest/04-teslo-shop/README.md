@@ -63,6 +63,7 @@ $ npm run test:cov
 ## Run dev environment
 
 1. Clone repository
+   
 2. Run
    
    ```bash
@@ -74,15 +75,15 @@ $ npm run test:cov
    $ npm i -g @nestjs/cli
    ```
 
-4. Run database
+4. Clone file ```.env.template``` & rename to ```.env```. 
+   
+5. Fill in environment variables in ```.env``` file.
+   
+6. Run database
 
    ```bash
    $ docker compose up -d
    ```
-
-5. Clone file ```.env.template``` & rename to ```.env```. 
-   
-6. Fill in environment variables in ```.env``` file.
 
 7. Run app
 
