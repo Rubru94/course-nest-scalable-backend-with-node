@@ -58,16 +58,44 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
+# Teslo API
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Run dev environment
 
-## Stay in touch
+1. Clone repository
+2. Run
+   
+   ```bash
+   $ npm install
+   ```
+3. Nest CLI installed
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+   ```bash
+   $ npm i -g @nestjs/cli
+   ```
 
-## License
+4. Run database
 
-Nest is [MIT licensed](LICENSE).
+   ```bash
+   $ docker compose up -d
+   ```
+
+5. Clone file ```.env.template``` & rename to ```.env```. 
+   
+6. Fill in environment variables in ```.env``` file.
+
+7. Run app
+
+   ```bash
+   $ npm run start:dev
+   ```
+
+## Stack
+
+- PostgreSQL
+- Nest
+
+## Bibliography
+
+- [Database connection](https://docs.nestjs.com/techniques/database)
+- [Teslo-seed-products](https://gist.github.com/Klerith/1fb1b9f758bb0c5b2253dfc94f09e1b6)
