@@ -14,6 +14,19 @@
       "stopOnEntry": false,
       "console": "integratedTerminal",
       "cwd": "${workspaceFolder}/nest/03-pokedex"
+    },
+    {
+      "name": "04-teslo-shop - Debug Nest Framework",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start:dev", "--", "--inspect-brk"], // using dev for connecting to database
+      "autoAttachChildProcesses": true,
+      "restart": true,
+      "sourceMaps": true,
+      "stopOnEntry": false,
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/nest/04-teslo-shop"
     }
   ]
 }
