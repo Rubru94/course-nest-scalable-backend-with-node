@@ -5,13 +5,13 @@ import {
   Logger,
   NotFoundException,
 } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { PaginationDto } from 'src/common/dtos/pagination.dto';
+import { FindOptionsWhere, Repository } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { Product } from './entities/product.entity';
-import { PaginationDto } from 'src/common/dtos/pagination.dto';
-
+import { validate as isUUID } from 'uuid'; // it can be used method from class-validator too --> import { isUUID } from 'class-validator';
 @Injectable()
 export class ProductsService {
   private readonly logger = new Logger('ProductsService');
@@ -37,10 +37,13 @@ export class ProductsService {
     return this.productRepository.find({ take: limit, skip: offset });
   }
 
-  async findOne(id: string): Promise<Product> {
-    const product = await this.productRepository.findOneBy({ id });
+  async findOne(term: string): Promise<Product> {
+    let findOptions: FindOptionsWhere<Product> = { slug: term };
+    if (isUUID(term)) findOptions = { id: term };
+
+    const product = await this.productRepository.findOneBy(findOptions);
     if (!product)
-      throw new NotFoundException(`Not found product with id: ${id}`);
+      throw new NotFoundException(`Not found product with id: ${term}`);
     return product;
   }
 
