@@ -9,9 +9,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
 import { Repository } from 'typeorm';
 import { validate as isUUID } from 'uuid'; // it can be used method from class-validator too --> import { isUUID } from 'class-validator';
-import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
-import { Product } from './entities/product.entity';
+import { Product, ProductImage } from './entities';
+import { CreateProductDto, PlainProductDto, UpdateProductDto } from './dto';
 @Injectable()
 export class ProductsService {
   private readonly logger = new Logger('ProductsService');
@@ -19,13 +18,22 @@ export class ProductsService {
   constructor(
     @InjectRepository(Product)
     private readonly productRepository: Repository<Product>,
+    @InjectRepository(ProductImage)
+    private readonly productImageRepository: Repository<ProductImage>,
   ) {}
 
-  async create(createProductDto: CreateProductDto): Promise<Product> {
+  async create(createProductDto: CreateProductDto): Promise<PlainProductDto> {
     try {
-      const product = this.productRepository.create(createProductDto);
+      const { images = [], ...productDetails } = createProductDto; // In this case operator rest is used, not spread. (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters)
+
+      const product = this.productRepository.create({
+        ...productDetails,
+        images: images.map(
+          (image) => this.productImageRepository.create({ url: image }), // As images are being created within the product creation typeorm takes care of inferring the rest and assigns the id of each product to the respective image.
+        ),
+      });
       await this.productRepository.save(product);
-      return product;
+      return new PlainProductDto(product);
     } catch (error) {
       this.handleDBException(error);
     }
@@ -64,6 +72,7 @@ export class ProductsService {
     const product = await this.productRepository.preload({
       id,
       ...updateProductDto,
+      images: [],
     });
     if (!product)
       throw new NotFoundException(`Not found product with id: ${id}`);
