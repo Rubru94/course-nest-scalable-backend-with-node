@@ -39,9 +39,18 @@ export class ProductsService {
     }
   }
 
-  async findAll(paginationDto: PaginationDto): Promise<Product[]> {
+  async findAll(paginationDto: PaginationDto): Promise<PlainProductDto[]> {
     const { limit = 10, offset = 0 } = paginationDto; // --> handle default values
-    return this.productRepository.find({ take: limit, skip: offset });
+
+    const products = await this.productRepository.find({
+      take: limit,
+      skip: offset,
+      relations: {
+        images: true,
+      },
+    });
+
+    return products.map((product) => new PlainProductDto(product));
   }
 
   async findOne(term: string): Promise<Product> {
@@ -49,7 +58,7 @@ export class ProductsService {
     if (isUUID(term))
       product = await this.productRepository.findOneBy({ id: term });
     else {
-      const qb = this.productRepository.createQueryBuilder();
+      const qb = this.productRepository.createQueryBuilder('prod');
       product = await qb
         .where(
           'UPPER(title)=:title or slug=:slug', // slug is always in lowercase & exact match is desired
@@ -58,6 +67,7 @@ export class ProductsService {
             slug: term, // if an exact match is not desired --> term.toLowerCase(),
           },
         )
+        .leftJoinAndSelect('prod.images', 'prodImages') // Eager relations only work when you use find* methods. If you use QueryBuilder eager relations are disabled and have to use leftJoinAndSelect to load the relation.
         .getOne();
     }
 
@@ -66,6 +76,11 @@ export class ProductsService {
         `Not found product with term(id, title or slug): ${term}`,
       );
     return product;
+  }
+
+  async findOnePlain(term: string): Promise<PlainProductDto> {
+    const product = await this.findOne(term);
+    return new PlainProductDto(product);
   }
 
   async update(id: string, updateProductDto: UpdateProductDto) {

@@ -39,6 +39,7 @@ export class Product {
 
   @OneToMany(() => ProductImage, (productImage) => productImage.product, {
     cascade: true,
+    eager: true, // https://orkhan.gitbook.io/typeorm/docs/eager-and-lazy-relations
   })
   images?: ProductImage[];
 

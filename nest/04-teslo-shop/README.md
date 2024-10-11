@@ -101,3 +101,4 @@ $ npm run test:cov
 - [Database connection](https://docs.nestjs.com/techniques/database)
 - [Teslo-seed-products](https://gist.github.com/Klerith/1fb1b9f758bb0c5b2253dfc94f09e1b6)
 - [Klerith/nest-teslo-shop](https://github.com/Klerith/nest-teslo-shop/tree/fin-seccion-10)
+- [Typeorm - Eager and Lazy Relations](https://orkhan.gitbook.io/typeorm/docs/eager-and-lazy-relations)
