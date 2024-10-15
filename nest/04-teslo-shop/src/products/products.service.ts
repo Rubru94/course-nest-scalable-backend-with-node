@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
-import { DataSource, Repository } from 'typeorm';
+import { DataSource, In, Repository } from 'typeorm';
 import { validate as isUUID } from 'uuid'; // it can be used method from class-validator too --> import { isUUID } from 'class-validator';
 import { Product, ProductImage } from './entities';
 import { CreateProductDto, PlainProductDto, UpdateProductDto } from './dto';
@@ -87,6 +87,9 @@ export class ProductsService {
   async update(id: string, updateProductDto: UpdateProductDto) {
     const { images, ...rest } = updateProductDto;
 
+    const productImages = await this.productImageRepository.findBy({
+      product: { id },
+    });
     const product = await this.productRepository.preload({
       id,
       ...rest,
@@ -101,16 +104,32 @@ export class ProductsService {
 
     try {
       if (images) {
-        // delete made by query runner, we can also use the repository --> this.productImageRepository.delete({ product: { id } })
-        await qr.manager.delete(ProductImage, { product: { id } });
-
-        product.images = images.map((image) =>
-          this.productImageRepository.create({ url: image }),
+        const urlsToDelete = productImages
+          .map(({ url }) => url)
+          .filter((url) => !images.includes(url));
+        const urlsToCreate = images.filter(
+          (imageUrl) => !productImages.map(({ url }) => url).includes(imageUrl),
         );
+        const imagesRemaining = productImages.filter(({ url }) =>
+          images.includes(url),
+        );
+
+        // delete made by query runner, we can also use the repository --> this.productImageRepository.delete(criteria)
+        await qr.manager.delete(ProductImage, {
+          product: { id },
+          url: In(urlsToDelete),
+        });
+
+        if (urlsToCreate.length > 0) {
+          product.images = [
+            ...imagesRemaining,
+            ...urlsToCreate.map((image) =>
+              this.productImageRepository.create({ url: image }),
+            ),
+          ];
+        }
       }
-      /***
-       * TODO avoid create new product image with new id each time
-       */
+
       await qr.manager.save(product);
 
       await qr.commitTransaction();
