@@ -14,6 +14,6 @@ export class PlainProductDto {
 
   constructor({ images, ...rest }: Product) {
     Object.assign(this, rest);
-    this.images = images.map((image) => image.url);
+    this.images = images ? images.map((image) => image.url) : [];
   }
 }

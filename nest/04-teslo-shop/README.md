@@ -102,3 +102,5 @@ $ npm run test:cov
 - [Teslo-seed-products](https://gist.github.com/Klerith/1fb1b9f758bb0c5b2253dfc94f09e1b6)
 - [Klerith/nest-teslo-shop](https://github.com/Klerith/nest-teslo-shop/tree/fin-seccion-10)
 - [Typeorm - Eager and Lazy Relations](https://orkhan.gitbook.io/typeorm/docs/eager-and-lazy-relations)
+- [Typeorm - Query Builder](https://orkhan.gitbook.io/typeorm/docs/insert-query-builder)
+- [Typeorm - Query Runner](https://orkhan.gitbook.io/typeorm/docs/query-runner)

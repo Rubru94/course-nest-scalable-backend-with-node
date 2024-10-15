@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { validate as isUUID } from 'uuid'; // it can be used method from class-validator too --> import { isUUID } from 'class-validator';
 import { Product, ProductImage } from './entities';
 import { CreateProductDto, PlainProductDto, UpdateProductDto } from './dto';
@@ -20,6 +20,7 @@ export class ProductsService {
     private readonly productRepository: Repository<Product>,
     @InjectRepository(ProductImage)
     private readonly productImageRepository: Repository<ProductImage>,
+    private readonly dataSource: DataSource,
   ) {}
 
   async create(createProductDto: CreateProductDto): Promise<PlainProductDto> {
@@ -84,18 +85,41 @@ export class ProductsService {
   }
 
   async update(id: string, updateProductDto: UpdateProductDto) {
+    const { images, ...rest } = updateProductDto;
+
     const product = await this.productRepository.preload({
       id,
-      ...updateProductDto,
-      images: [],
+      ...rest,
     });
     if (!product)
       throw new NotFoundException(`Not found product with id: ${id}`);
 
+    // Create query runner
+    const qr = this.dataSource.createQueryRunner();
+    await qr.connect();
+    await qr.startTransaction();
+
     try {
-      await this.productRepository.save(product);
-      return product;
+      if (images) {
+        // delete made by query runner, we can also use the repository --> this.productImageRepository.delete({ product: { id } })
+        await qr.manager.delete(ProductImage, { product: { id } });
+
+        product.images = images.map((image) =>
+          this.productImageRepository.create({ url: image }),
+        );
+      }
+      /***
+       * TODO avoid create new product image with new id each time
+       */
+      await qr.manager.save(product);
+
+      await qr.commitTransaction();
+      await qr.release(); // Close query runner
+
+      return this.findOnePlain(id);
     } catch (error) {
+      await qr.rollbackTransaction();
+      await qr.release(); // Close query runner
       this.handleDBException(error);
     }
   }
