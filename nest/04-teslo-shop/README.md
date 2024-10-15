@@ -85,7 +85,12 @@ $ npm run test:cov
    $ docker compose up -d
    ```
 
-7. Run app
+7. Run seed
+   ```
+   POST: http://localhost:3000/api/seed
+   ```
+
+8. Run app
 
    ```bash
    $ npm run start:dev

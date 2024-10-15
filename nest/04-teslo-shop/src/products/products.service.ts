@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
-import { DataSource, In, Repository } from 'typeorm';
+import { DataSource, DeleteResult, In, Repository } from 'typeorm';
 import { validate as isUUID } from 'uuid'; // it can be used method from class-validator too --> import { isUUID } from 'class-validator';
 import { Product, ProductImage } from './entities';
 import { CreateProductDto, PlainProductDto, UpdateProductDto } from './dto';
@@ -161,4 +161,14 @@ export class ProductsService {
       'Unexpected error, check server logs.',
     );
   };
+
+  async deleteAllProducts(): Promise<DeleteResult> {
+    const qb = this.productRepository.createQueryBuilder('product');
+
+    try {
+      return await qb.delete().where({}).execute();
+    } catch (error) {
+      this.handleDBException(error);
+    }
+  }
 }
