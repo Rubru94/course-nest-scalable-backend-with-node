@@ -143,10 +143,10 @@ export class ProductsService {
     }
   }
 
-  async remove(id: string): Promise<Product> {
+  async remove(id: string): Promise<PlainProductDto> {
     const product = await this.findOne(id);
     await this.productRepository.remove(product); // remove by criteria --> await this.productRepository.delete({ id });
-    return product;
+    return new PlainProductDto(product);
   }
 
   private handleDBException = (error: any) => {
