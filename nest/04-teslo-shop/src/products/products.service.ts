@@ -9,8 +9,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
 import { DataSource, DeleteResult, In, Repository } from 'typeorm';
 import { validate as isUUID } from 'uuid'; // it can be used method from class-validator too --> import { isUUID } from 'class-validator';
-import { Product, ProductImage } from './entities';
 import { CreateProductDto, PlainProductDto, UpdateProductDto } from './dto';
+import { Product, ProductImage } from './entities';
 @Injectable()
 export class ProductsService {
   private readonly logger = new Logger('ProductsService');
@@ -25,16 +25,20 @@ export class ProductsService {
 
   async create(createProductDto: CreateProductDto): Promise<PlainProductDto> {
     try {
-      const { images = [], ...productDetails } = createProductDto; // In this case operator rest is used, not spread. (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters)
-
-      const product = this.productRepository.create({
-        ...productDetails,
-        images: images.map(
-          (image) => this.productImageRepository.create({ url: image }), // As images are being created within the product creation typeorm takes care of inferring the rest and assigns the id of each product to the respective image.
-        ),
-      });
+      const product = this.createProduct(createProductDto);
       await this.productRepository.save(product);
       return new PlainProductDto(product);
+    } catch (error) {
+      this.handleDBException(error);
+    }
+  }
+
+  async createBatch(createProductDtoCollection: CreateProductDto[]) {
+    try {
+      const products = createProductDtoCollection.map((product) =>
+        this.createProduct(product),
+      );
+      return await this.productRepository.save(products);
     } catch (error) {
       this.handleDBException(error);
     }
@@ -149,6 +153,27 @@ export class ProductsService {
     return new PlainProductDto(product);
   }
 
+  async deleteAllProducts(): Promise<DeleteResult> {
+    const qb = this.productRepository.createQueryBuilder('product');
+
+    try {
+      return await qb.delete().where({}).execute();
+    } catch (error) {
+      this.handleDBException(error);
+    }
+  }
+
+  private createProduct(createProductDto: CreateProductDto): Product {
+    const { images = [], ...productDetails } = createProductDto; // In this case operator rest is used, not spread. (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters)
+
+    return this.productRepository.create({
+      ...productDetails,
+      images: images.map(
+        (image) => this.productImageRepository.create({ url: image }), // As images are being created within the product creation typeorm takes care of inferring the rest and assigns the id of each product to the respective image.
+      ),
+    });
+  }
+
   private handleDBException = (error: any) => {
     const POSTGRESQL_UNIQUE_VIOLATION_ERROR = '23505';
     const { code, detail } = error;
@@ -161,14 +186,4 @@ export class ProductsService {
       'Unexpected error, check server logs.',
     );
   };
-
-  async deleteAllProducts(): Promise<DeleteResult> {
-    const qb = this.productRepository.createQueryBuilder('product');
-
-    try {
-      return await qb.delete().where({}).execute();
-    } catch (error) {
-      this.handleDBException(error);
-    }
-  }
 }
