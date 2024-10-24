@@ -110,3 +110,5 @@ $ npm run test:cov
 - [Typeorm - Query Runner](https://orkhan.gitbook.io/typeorm/docs/query-runner)
 - [Klerith/nest-teslo-shop - Postgres & TypeORM](https://github.com/Klerith/nest-teslo-shop/tree/fin-seccion-10)
 - [Klerith/nest-teslo-shop - Relationships TypeORM](https://github.com/Klerith/nest-teslo-shop/tree/fin-seccion-11)
+- [File upload](https://docs.nestjs.com/techniques/file-upload)
+
