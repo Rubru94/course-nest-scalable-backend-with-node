@@ -10,7 +10,6 @@ export const imageFileFilter = (
   /* if (!file) return callback(new Error('File is empty'), false); */
 
   const fileExtension = file.mimetype.split('/')[1];
-  console.log({ fileExtension });
 
   if (validExtensions.includes(fileExtension as ImageExtension))
     return callback(null, true);
