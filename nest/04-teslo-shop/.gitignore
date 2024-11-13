@@ -58,3 +58,7 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 # static
 static/products/*
 !static/products/.gitkeep
+
+# public
+public/products/*
+!public/products/.gitkeep
