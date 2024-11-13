@@ -14,10 +14,14 @@ import { diskStorage } from 'multer';
 import { ImageExtension } from '../common/enums';
 import { FilesService } from './files.service';
 import { imageFileFilter, imageFileNamer } from './helpers';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('files')
 export class FilesController {
-  constructor(private readonly filesService: FilesService) {}
+  constructor(
+    private readonly configService: ConfigService,
+    private readonly filesService: FilesService,
+  ) {}
 
   @Post('product')
   @UseInterceptors(
@@ -38,7 +42,7 @@ export class FilesController {
         `File must be a valid image (${Object.values(ImageExtension)})`,
       );
 
-    const secureUrl = `${file.filename}`;
+    const secureUrl = `${this.configService.get('HOST_API')}/files/product/${file.filename}`;
 
     return { secureUrl };
   }
