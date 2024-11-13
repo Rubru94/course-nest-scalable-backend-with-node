@@ -1,14 +1,18 @@
 import {
   BadRequestException,
   Controller,
+  Get,
+  Param,
   Post,
+  Res,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
-import { FilesService } from './files.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ImageExtension } from '../common/enums';
+import { Response } from 'express';
 import { diskStorage } from 'multer';
+import { ImageExtension } from '../common/enums';
+import { FilesService } from './files.service';
 import { imageFileFilter, imageFileNamer } from './helpers';
 
 @Controller('files')
@@ -34,6 +38,16 @@ export class FilesController {
         `File must be a valid image (${Object.values(ImageExtension)})`,
       );
 
-    return { filename: file.originalname };
+    const secureUrl = `${file.filename}`;
+
+    return { secureUrl };
+  }
+
+  @Get('product/:imageName')
+  findProductImage(
+    @Res() res: Response, // Handle response with express way. This causes certain steps in nestjs lifecycle to be skipped (e.g. interceptors).
+    @Param('imageName') imageName: string,
+  ) {
+    res.status(200).sendFile(this.filesService.findProductImagePath(imageName));
   }
 }
