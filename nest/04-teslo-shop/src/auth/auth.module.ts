@@ -3,11 +3,45 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { User } from './entities/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   controllers: [AuthController],
   providers: [AuthService],
-  imports: [TypeOrmModule.forFeature([User])],
+  imports: [
+    TypeOrmModule.forFeature([User]),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+
+    /***
+     * It is possible to use register with the secret JWT, but this way the
+     * environment variable may not be set at the time the application is being built.
+     *
+     * Therefore it is convenient that this module is mounted asynchronously to ensure
+     * that we always have a value for the JWT secret.
+     */
+
+    /* JwtModule.register({
+      secret: process.env.JWT_SECRET,
+      signOptions: {
+        expiresIn: '2h',
+      },
+    }), */
+
+    JwtModule.registerAsync({
+      imports: [],
+      inject: [],
+      useFactory: () => {
+        console.log('JWT secret', process.env.JWT_SECRET);
+        return {
+          secret: process.env.JWT_SECRET,
+          signOptions: {
+            expiresIn: '2h',
+          },
+        };
+      },
+    }),
+  ],
   exports: [TypeOrmModule],
 })
 export class AuthModule {}

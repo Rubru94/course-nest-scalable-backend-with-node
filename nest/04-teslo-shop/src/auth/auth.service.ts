@@ -37,8 +37,6 @@ export class AuthService {
   async login(loginUserDto: LoginUserDto) {
     const { email, password } = loginUserDto;
 
-    // const user = await this.userRepository.findOneBy({ email });
-
     /**
      * It is only necessary to obtain the user's password in login.
      * By default the user entity will have that column with { select: false }
