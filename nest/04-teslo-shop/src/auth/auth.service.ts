@@ -4,6 +4,7 @@ import { handleDBException } from '../common/handlers/error.handler';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -16,9 +17,18 @@ export class AuthService {
 
   async createUser(createUserDto: CreateUserDto) {
     try {
-      const user = this.userRepository.create(createUserDto);
+      const saltRounds = 10;
+      const { password, ...userData } = createUserDto;
+
+      const user = this.userRepository.create({
+        ...userData,
+        password: bcrypt.hashSync(password, saltRounds),
+      });
       await this.userRepository.save(user);
+      delete user.password;
+
       return user;
+      // TODO: Return access JWT
     } catch (error) {
       handleDBException(error, this.logger);
     }
