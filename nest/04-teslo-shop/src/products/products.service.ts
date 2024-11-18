@@ -1,14 +1,9 @@
-import {
-  BadRequestException,
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { PaginationDto } from 'src/common/dtos/pagination.dto';
 import { DataSource, DeleteResult, In, Repository } from 'typeorm';
 import { validate as isUUID } from 'uuid'; // it can be used method from class-validator too --> import { isUUID } from 'class-validator';
+import { PaginationDto } from '../common/dtos/pagination.dto';
+import { handleDBException } from '../common/handlers/error.handler';
 import { CreateProductDto, PlainProductDto, UpdateProductDto } from './dto';
 import { Product, ProductImage } from './entities';
 @Injectable()
@@ -29,7 +24,7 @@ export class ProductsService {
       await this.productRepository.save(product);
       return new PlainProductDto(product);
     } catch (error) {
-      this.handleDBException(error);
+      handleDBException(error, this.logger);
     }
   }
 
@@ -40,7 +35,7 @@ export class ProductsService {
       );
       return await this.productRepository.save(products);
     } catch (error) {
-      this.handleDBException(error);
+      handleDBException(error, this.logger);
     }
   }
 
@@ -143,7 +138,7 @@ export class ProductsService {
     } catch (error) {
       await qr.rollbackTransaction();
       await qr.release(); // Close query runner
-      this.handleDBException(error);
+      handleDBException(error, this.logger);
     }
   }
 
@@ -159,7 +154,7 @@ export class ProductsService {
     try {
       return await qb.delete().where({}).execute();
     } catch (error) {
-      this.handleDBException(error);
+      handleDBException(error, this.logger);
     }
   }
 
@@ -173,17 +168,4 @@ export class ProductsService {
       ),
     });
   }
-
-  private handleDBException = (error: any) => {
-    const POSTGRESQL_UNIQUE_VIOLATION_ERROR = '23505';
-    const { code, detail } = error;
-
-    if (code === POSTGRESQL_UNIQUE_VIOLATION_ERROR)
-      throw new BadRequestException(detail);
-
-    this.logger.error(error, { ...error }); // print error as log & error object detailed
-    throw new InternalServerErrorException(
-      'Unexpected error, check server logs.',
-    );
-  };
 }

@@ -1,13 +1,9 @@
-import {
-  BadRequestException,
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-} from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from './entities/user.entity';
+import { handleDBException } from '../common/handlers/error.handler';
 import { Repository } from 'typeorm';
+import { CreateUserDto } from './dto/create-user.dto';
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class AuthService {
@@ -24,21 +20,7 @@ export class AuthService {
       await this.userRepository.save(user);
       return user;
     } catch (error) {
-      this.handleDBException(error);
+      handleDBException(error, this.logger);
     }
   }
-
-  // type return as never because this function always throw an error
-  private handleDBException = (error: any): never => {
-    const POSTGRESQL_UNIQUE_VIOLATION_ERROR = '23505';
-    const { code, detail } = error;
-
-    if (code === POSTGRESQL_UNIQUE_VIOLATION_ERROR)
-      throw new BadRequestException(detail);
-
-    this.logger.error(error, { ...error }); // print error as log & error object detailed
-    throw new InternalServerErrorException(
-      'Unexpected error, check server logs.',
-    );
-  };
 }
