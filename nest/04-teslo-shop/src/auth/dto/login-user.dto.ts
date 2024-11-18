@@ -9,7 +9,7 @@ import { userPasswordDef } from '../user-password-def.pattern';
 
 const { pattern, message } = userPasswordDef;
 
-export class CreateUserDto {
+export class LoginUserDto {
   @IsString()
   @IsEmail()
   email: string;
@@ -19,8 +19,4 @@ export class CreateUserDto {
   @MaxLength(50)
   @Matches(pattern, { message })
   password: string;
-
-  @IsString()
-  @MinLength(1)
-  fullName: string;
 }

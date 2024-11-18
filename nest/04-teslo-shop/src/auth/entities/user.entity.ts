@@ -8,7 +8,7 @@ export class User {
   @Column('text', { unique: true })
   email: string;
 
-  @Column('text')
+  @Column('text', { select: false }) // select --> Indicates if column is always selected by QueryBuilder and find operations. Default value is "true".
   password: string;
 
   @Column('text')
