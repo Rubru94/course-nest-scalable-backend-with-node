@@ -1,10 +1,11 @@
-import { Module } from '@nestjs/common';
+import { InternalServerErrorException, Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { User } from './entities/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   controllers: [AuthController],
@@ -29,12 +30,18 @@ import { JwtModule } from '@nestjs/jwt';
     }), */
 
     JwtModule.registerAsync({
-      imports: [],
-      inject: [],
-      useFactory: () => {
-        console.log('JWT secret', process.env.JWT_SECRET);
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => {
+        const secret = configService.get('JWT_SECRET');
+        // console.log('JWT secret', secret);
+        if (!secret)
+          throw new InternalServerErrorException(
+            'JWT_SECRET env var must be defined.',
+          );
+
         return {
-          secret: process.env.JWT_SECRET,
+          secret: secret,
           signOptions: {
             expiresIn: '2h',
           },
