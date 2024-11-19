@@ -30,9 +30,9 @@ export class AuthService {
         password: bcrypt.hashSync(password, saltRounds),
       });
       await this.userRepository.save(user);
-      delete user.password;
 
-      return { ...user, token: this.getJwtToken({ email: user.email }) };
+      delete user.password;
+      return { ...user, token: this.getJwtToken({ id: user.id }) };
     } catch (error) {
       handleDBException(error, this.logger);
     }
@@ -47,7 +47,7 @@ export class AuthService {
      * and here we retrieve it with a specific query.
      */
     const user = await this.userRepository.findOne({
-      select: { email: true, password: true },
+      select: { id: true, email: true, password: true },
       where: { email },
     });
 
@@ -58,7 +58,8 @@ export class AuthService {
     if (!bcrypt.compareSync(password, user.password))
       throw new UnauthorizedException('Credentials are not valid (password)');
 
-    return { ...user, token: this.getJwtToken({ email: user.email }) };
+    delete user.password;
+    return { ...user, token: this.getJwtToken({ id: user.id }) };
   }
 
   private getJwtToken(payload: JwtPayload) {
