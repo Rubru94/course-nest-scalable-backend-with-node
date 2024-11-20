@@ -34,7 +34,8 @@ export class AuthController {
   testingPrivateRoute(
     /* @Req() request: Express.Request */
     @GetUser() user: User,
-    @GetUser('email') userEmail: string,
+    @GetUser('email') userSpecific: User,
+    @GetUser(['email', 'fullName']) userSpecific2: User,
     @RawHeaders() rawHeaders: string[],
     @Headers() headers: IncomingHttpHeaders, // Decorator from @nestjs/common
   ) {
@@ -48,7 +49,8 @@ export class AuthController {
       ok: true,
       message: 'Private route',
       user,
-      userEmail,
+      userSpecific,
+      userSpecific2,
       rawHeaders,
       headers,
     };
