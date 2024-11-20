@@ -1,24 +1,28 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
+  Get,
+  Param,
   ParseUUIDPipe,
+  Patch,
+  Post,
   Query,
 } from '@nestjs/common';
-import { ProductsService } from './products.service';
+import { Auth } from '../auth/decorators';
+import { ValidRole } from '../auth/enums/valid-role.enum';
+import { PaginationDto } from '../common/dtos/pagination.dto';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { PaginationDto } from 'src/common/dtos/pagination.dto';
+import { ProductsService } from './products.service';
 
 @Controller('products')
+// @Auth(ValidRole.User) // Custom decorator can be used for all endpoints if placed at controller level.
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Post()
+  @Auth(ValidRole.Admin)
   create(@Body() createProductDto: CreateProductDto) {
     return this.productsService.create(createProductDto);
   }
@@ -34,6 +38,7 @@ export class ProductsController {
   }
 
   @Patch(':id')
+  @Auth(ValidRole.Admin)
   update(
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updateProductDto: UpdateProductDto,
@@ -42,6 +47,7 @@ export class ProductsController {
   }
 
   @Delete(':id')
+  @Auth(ValidRole.Admin)
   remove(@Param('id', ParseUUIDPipe) id: string) {
     return this.productsService.remove(id);
   }

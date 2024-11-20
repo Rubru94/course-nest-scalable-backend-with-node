@@ -6,6 +6,7 @@ export class SeedController {
   constructor(private readonly seedService: SeedService) {}
 
   @Post()
+  /* @Auth(ValidRole.Admin) */
   populateDb() {
     return this.seedService.populateDb();
   }

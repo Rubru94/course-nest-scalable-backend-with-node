@@ -8,13 +8,15 @@ import {
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 import { diskStorage } from 'multer';
+import { Auth } from '../auth/decorators';
+import { ValidRole } from '../auth/enums/valid-role.enum';
 import { ImageExtension } from '../common/enums';
 import { FilesService } from './files.service';
 import { imageFileFilter, imageFileNamer } from './helpers';
-import { ConfigService } from '@nestjs/config';
 
 @Controller('files')
 export class FilesController {
@@ -24,6 +26,7 @@ export class FilesController {
   ) {}
 
   @Post('product')
+  @Auth(ValidRole.Admin)
   @UseInterceptors(
     FileInterceptor('file', {
       fileFilter: imageFileFilter,
