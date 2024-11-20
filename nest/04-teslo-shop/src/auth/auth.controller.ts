@@ -9,11 +9,11 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { IncomingHttpHeaders } from 'http';
 import { AuthService } from './auth.service';
-import { GetUser, RawHeaders, RoleProtected } from './decorators';
+import { Auth, GetUser, RawHeaders, RoleProtected } from './decorators';
 import { CreateUserDto, LoginUserDto } from './dto';
 import { User } from './entities/user.entity';
-import { UserRoleGuard } from './guards/user-role.guard';
 import { ValidRole } from './enums/valid-role.enum';
+import { UserRoleGuard } from './guards/user-role.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -29,6 +29,9 @@ export class AuthController {
     return this.authService.login(loginUserDto);
   }
 
+  /**
+   * Route with authentication only.
+   */
   @Get('private')
   @UseGuards(AuthGuard()) // By default AuthGuard use JwtStrategy validations
   testingPrivateRoute(
@@ -56,6 +59,9 @@ export class AuthController {
     };
   }
 
+  /**
+   * Route with authentication & authorization.
+   */
   @Get('private2')
   // @SetMetadata('roles', ['admin', 'super-user'])
   @RoleProtected(ValidRole.SuperUser, ValidRole.Admin)
@@ -65,6 +71,19 @@ export class AuthController {
     return {
       ok: true,
       message: 'Private route 2',
+      user,
+    };
+  }
+
+  /**
+   * Route with authentication & authorization using decorator composition (https://docs.nestjs.com/custom-decorators#decorator-composition).
+   */
+  @Get('private3')
+  @Auth(ValidRole.SuperUser, ValidRole.Admin)
+  testingPrivateRoute3(@GetUser() user: User) {
+    return {
+      ok: true,
+      message: 'Private route 3',
       user,
     };
   }
