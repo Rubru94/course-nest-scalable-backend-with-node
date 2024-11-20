@@ -1,7 +1,9 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { CreateUserDto, LoginUserDto } from './dto';
+import { GetUser } from './decorators/get-user.decorator';
+import { User } from './entities/user.entity';
 
 @Controller('auth')
 export class AuthController {
@@ -19,7 +21,16 @@ export class AuthController {
 
   @Get('private')
   @UseGuards(AuthGuard()) // By default AuthGuard use JwtStrategy validations
-  testingPrivateRoute() {
-    return { ok: true, message: 'Private route' };
+  testingPrivateRoute(
+    /* @Req() request: Express.Request */
+    @GetUser(['email', 'role']) user: User,
+  ) {
+    /**
+     * if passed through the guard we could recover the user from express request.
+     *
+     * console.log({ user: request.user });
+     */
+
+    return { ok: true, message: 'Private route', user };
   }
 }
