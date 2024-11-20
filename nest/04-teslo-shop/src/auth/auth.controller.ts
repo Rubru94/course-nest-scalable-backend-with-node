@@ -1,9 +1,17 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  UseGuards,
+  Headers,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { CreateUserDto, LoginUserDto } from './dto';
 import { User } from './entities/user.entity';
 import { GetUser, RawHeaders } from './decorators';
+import { IncomingHttpHeaders } from 'http';
 
 @Controller('auth')
 export class AuthController {
@@ -25,6 +33,8 @@ export class AuthController {
     /* @Req() request: Express.Request */
     @GetUser() user: User,
     @GetUser('email') userEmail: string,
+    @RawHeaders() rawHeaders: string[],
+    @Headers() headers: IncomingHttpHeaders, // Decorator from @nestjs/common
   ) {
     /**
      * if passed through the guard we could recover the user from express request.
@@ -32,6 +42,13 @@ export class AuthController {
      * console.log({ user: request.user });
      */
 
-    return { ok: true, message: 'Private route', user, userEmail };
+    return {
+      ok: true,
+      message: 'Private route',
+      user,
+      userEmail,
+      rawHeaders,
+      headers,
+    };
   }
 }
