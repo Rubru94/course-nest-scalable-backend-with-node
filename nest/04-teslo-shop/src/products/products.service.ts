@@ -2,8 +2,10 @@ import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, DeleteResult, In, Repository } from 'typeorm';
 import { validate as isUUID } from 'uuid'; // it can be used method from class-validator too --> import { isUUID } from 'class-validator';
+import { User } from '../auth/entities/user.entity';
 import { PaginationDto } from '../common/dtos/pagination.dto';
 import { handleDBException } from '../common/handlers/error.handler';
+import { getRandomInt } from '../common/helpers/random.helper';
 import { CreateProductDto, PlainProductDto, UpdateProductDto } from './dto';
 import { Product, ProductImage } from './entities';
 @Injectable()
@@ -18,9 +20,12 @@ export class ProductsService {
     private readonly dataSource: DataSource,
   ) {}
 
-  async create(createProductDto: CreateProductDto): Promise<PlainProductDto> {
+  async create(
+    createProductDto: CreateProductDto,
+    user: User,
+  ): Promise<PlainProductDto> {
     try {
-      const product = this.createProduct(createProductDto);
+      const product = this.createProduct(createProductDto, user);
       await this.productRepository.save(product);
       return new PlainProductDto(product);
     } catch (error) {
@@ -28,10 +33,13 @@ export class ProductsService {
     }
   }
 
-  async createBatch(createProductDtoCollection: CreateProductDto[]) {
+  async createBatch(
+    createProductDtoCollection: CreateProductDto[],
+    users: User[],
+  ) {
     try {
       const products = createProductDtoCollection.map((product) =>
-        this.createProduct(product),
+        this.createProduct(product, users[getRandomInt(users.length)]),
       );
       return await this.productRepository.save(products);
     } catch (error) {
@@ -83,7 +91,7 @@ export class ProductsService {
     return new PlainProductDto(product);
   }
 
-  async update(id: string, updateProductDto: UpdateProductDto) {
+  async update(id: string, updateProductDto: UpdateProductDto, user: User) {
     const { images, ...rest } = updateProductDto;
 
     const productImages = await this.productImageRepository.findBy({
@@ -129,6 +137,7 @@ export class ProductsService {
         }
       }
 
+      product.user = user;
       await qr.manager.save(product);
 
       await qr.commitTransaction();
@@ -158,11 +167,15 @@ export class ProductsService {
     }
   }
 
-  private createProduct(createProductDto: CreateProductDto): Product {
+  private createProduct(
+    createProductDto: CreateProductDto,
+    user: User,
+  ): Product {
     const { images = [], ...productDetails } = createProductDto; // In this case operator rest is used, not spread. (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters)
 
     return this.productRepository.create({
       ...productDetails,
+      user,
       images: images.map(
         (image) => this.productImageRepository.create({ url: image }), // As images are being created within the product creation typeorm takes care of inferring the rest and assigns the id of each product to the respective image.
       ),

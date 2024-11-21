@@ -3,9 +3,11 @@ import {
   BeforeUpdate,
   Column,
   Entity,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { User } from '../../auth/entities/user.entity';
 import { ProductImage } from './product-image.entity';
 
 @Entity({ name: 'products' })
@@ -42,6 +44,10 @@ export class Product {
     eager: true, // https://orkhan.gitbook.io/typeorm/docs/eager-and-lazy-relations
   })
   images?: ProductImage[];
+
+  @ManyToOne(() => User, (user) => user.products, { eager: true })
+  // @JoinColumn({ name: 'user_id' }) // Set related column name of products table from DB
+  user: User;
 
   @BeforeInsert()
   checkSlugInsert() {

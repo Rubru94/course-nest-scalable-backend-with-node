@@ -2,7 +2,7 @@ import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { handleDBException } from '../common/handlers/error.handler';
 import { CreateUserDto, LoginUserDto } from './dto';
 import { User } from './entities/user.entity';
@@ -20,15 +20,9 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async createUser(createUserDto: CreateUserDto): Promise<AuthenticatedUser> {
+  async registerUser(createUserDto: CreateUserDto): Promise<AuthenticatedUser> {
     try {
-      const saltRounds = 10;
-      const { password, ...userData } = createUserDto;
-
-      const user = this.userRepository.create({
-        ...userData,
-        password: bcrypt.hashSync(password, saltRounds),
-      });
+      const user = this.createUser(createUserDto);
       await this.userRepository.save(user);
 
       delete user.password;
@@ -62,8 +56,39 @@ export class AuthService {
     return { ...user, token: this.getJwtToken({ id: user.id }) };
   }
 
+  async registerUserBatch(createUserDtoCollection: CreateUserDto[]) {
+    try {
+      const users = createUserDtoCollection.map((user) =>
+        this.createUser(user),
+      );
+      return await this.userRepository.save(users);
+    } catch (error) {
+      handleDBException(error, this.logger);
+    }
+  }
+
+  async deleteAllUsers(): Promise<DeleteResult> {
+    const qb = this.userRepository.createQueryBuilder('user');
+
+    try {
+      return await qb.delete().where({}).execute();
+    } catch (error) {
+      handleDBException(error, this.logger);
+    }
+  }
+
   private getJwtToken(payload: JwtPayload) {
     const token = this.jwtService.sign(payload);
     return token;
+  }
+
+  private createUser(createUserDto: CreateUserDto): User {
+    const saltRounds = 10;
+    const { password, ...userData } = createUserDto;
+
+    return this.userRepository.create({
+      ...userData,
+      password: bcrypt.hashSync(password, saltRounds),
+    });
   }
 }

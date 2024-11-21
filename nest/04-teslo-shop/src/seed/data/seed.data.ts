@@ -1,4 +1,12 @@
-import { Gender } from 'src/common/enums';
+import { ValidRole } from '../../auth/enums/valid-role.enum';
+import { Gender } from '../../common/enums';
+
+interface SeedUser {
+  email: string;
+  password: string;
+  fullName: string;
+  roles: string[];
+}
 
 interface SeedProduct {
   description: string;
@@ -17,10 +25,31 @@ type ValidSizes = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL';
 type ValidTypes = 'shirts' | 'pants' | 'hoodies' | 'hats';
 
 interface SeedData {
+  users: SeedUser[];
   products: SeedProduct[];
 }
 
 export const initialData: SeedData = {
+  users: [
+    {
+      email: 'test1@mail.com',
+      password: 'Abc123',
+      fullName: 'Test One',
+      roles: [ValidRole.Admin, ValidRole.User],
+    },
+    {
+      email: 'test2@mail.com',
+      password: 'Abc123',
+      fullName: 'Test Two',
+      roles: [ValidRole.Admin, ValidRole.User],
+    },
+    {
+      email: 'test3@mail.com',
+      password: 'Abc123',
+      fullName: 'Test Three',
+      roles: [ValidRole.Admin, ValidRole.User],
+    },
+  ],
   products: [
     {
       description:
