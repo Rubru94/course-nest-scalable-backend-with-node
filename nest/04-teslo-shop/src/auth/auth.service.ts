@@ -67,6 +67,13 @@ export class AuthService {
     }
   }
 
+  /**
+   * User token revalidation
+   */
+  async checkAuthStatus(user: User): Promise<AuthenticatedUser> {
+    return { ...user, token: this.getJwtToken({ id: user.id }) };
+  }
+
   async deleteAllUsers(): Promise<DeleteResult> {
     const qb = this.userRepository.createQueryBuilder('user');
 
