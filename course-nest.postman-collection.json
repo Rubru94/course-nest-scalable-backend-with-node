@@ -1,0 +1,990 @@
+{
+	"info": {
+		"_postman_id": "a16b3485-8004-4ba2-b5f7-1f53fa67147c",
+		"name": "Course nest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9561143"
+	},
+	"item": [
+		{
+			"name": "Car dealership",
+			"item": [
+				{
+					"name": "Cars",
+					"item": [
+						{
+							"name": "All cars",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/cars",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"cars"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Car by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/cars/409d596c-a18f-42b6-a8cf-b8fdf68c3a87",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"cars",
+										"409d596c-a18f-42b6-a8cf-b8fdf68c3a87"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Car",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://localhost:3000/cars",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"cars"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit Car",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"7cc88e37-bd6a-436e-8d47-bb1b00111505\",\n    \"model\": \"Accord\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/cars/7cc88e37-bd6a-436e-8d47-bb1b00111505",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"cars",
+										"7cc88e37-bd6a-436e-8d47-bb1b00111505"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove Car",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/cars/7cc88e37-bd6a-436e-8d47-bb1b00111505",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"cars",
+										"7cc88e37-bd6a-436e-8d47-bb1b00111505"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Brands",
+					"item": [
+						{
+							"name": "All brands",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/brands",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"brands"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Brand by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/brands/cdf0c108-5665-47ee-b61b-fc22d5f606c6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"brands",
+										"cdf0c108-5665-47ee-b61b-fc22d5f606c6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Brand",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Infinity\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/brands",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"brands"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Brand",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"fc231a27-2cb2-406f-a4e5-cd2ed55dc4a4\",\n    \"name\": \"Mazda\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/brands/fc231a27-2cb2-406f-a4e5-cd2ed55dc4a4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"brands",
+										"fc231a27-2cb2-406f-a4e5-cd2ed55dc4a4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove Brand",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/brands/cdf0c108-5665-47ee-b61b-fc22d5f606c6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"brands",
+										"cdf0c108-5665-47ee-b61b-fc22d5f606c6"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Seed",
+					"item": [
+						{
+							"name": "Populate DB",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/seed",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"seed"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Pokedex",
+			"item": [
+				{
+					"name": "Pokemon",
+					"item": [
+						{
+							"name": "All pokemons",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v2/pokemon",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v2",
+										"pokemon"
+									],
+									"query": [
+										{
+											"key": "offset",
+											"value": "10",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "3",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pokemon by term",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v2/pokemon/66c83513a85f8db2afa53f0e",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v2",
+										"pokemon",
+										"66c83513a85f8db2afa53f0e"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove Pokemon",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v2/pokemon/66d05791cc6dcc124c14db79",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v2",
+										"pokemon",
+										"66d05791cc6dcc124c14db79"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Pokemon",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Pikachu\",\n    \"no\": 10\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v2/pokemon",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v2",
+										"pokemon"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Pokemon",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Raichu\",\n    \"no\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v2/pokemon/66c83513a85f8db2afa53f0e",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v2",
+										"pokemon",
+										"66c83513a85f8db2afa53f0e"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Seed",
+					"item": [
+						{
+							"name": "Populate DB",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v2/seed",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v2",
+										"seed"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "index",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:3000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000"
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Teslo shop",
+			"item": [
+				{
+					"name": "Products",
+					"item": [
+						{
+							"name": "All products",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/products",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"products"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "3",
+											"disabled": true
+										},
+										{
+											"key": "offset",
+											"value": "0",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Product by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/products/example_shirt_8",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"products",
+										"example_shirt_8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete product by id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/products/dca8ac01-4172-4d2d-b920-2ff41863f3b9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"products",
+										"dca8ac01-4172-4d2d-b920-2ff41863f3b9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create product",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA4MTNmMWRlLTBjYWUtNGI0Ny1hZjU5LWY3OTNmYTMyOWJhNyIsImlhdCI6MTczMjE3NjQwMCwiZXhwIjoxNzMyMTgzNjAwfQ.YJS-0ldr0100XMKHaQ1RUU86RAy9ra5OQB2YmD9dS_U",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Example shirt 11\",\n    \"sizes\": [\n        \"SM\",\n        \"M\",\n        \"L\"\n    ],\n    \"gender\": \"male\",\n    // \"slug\": \"slug example_shirts3\",\n    \"price\": 15.99,\n    \"images\": [\n        \"http://image1.jpg\",\n        \"http://image2.jpg\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/products",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Upload image product",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA4MTNmMWRlLTBjYWUtNGI0Ny1hZjU5LWY3OTNmYTMyOWJhNyIsImlhdCI6MTczMjExNjQ2NywiZXhwIjoxNzMyMTIzNjY3fQ.dRj5BzW-pL7S8a45oqPL960xh-TrJm9nJswK9lazMQA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/home/ruben/Descargas/images.jpeg"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/files/product",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"files",
+										"product"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register user",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"john.Does@mail.com\",\n    \"password\": \"Abc123\",\n    \"fullName\": \"John Doe\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"test1@mail.com\",\n    \"password\": \"Abc123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get image product",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/home/ruben/Documentos/projects/personal/astro-project/astro-cover.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/files/product/:imageName",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"files",
+										"product",
+										":imageName"
+									],
+									"variable": [
+										{
+											"key": "imageName",
+											"value": "1473809-00-A_1_2000.jpg"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Check auth status",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkzNWNiMGRhLTgxY2YtNGNiZC04YTgxLTFhNzYyMDQzYTlhMyIsImlhdCI6MTczMjE5MDU0MCwiZXhwIjoxNzMyMTk3NzQwfQ.keTii5-l4um2blOjBBX4P2ImFuaEUhUUO3xEywqWt1M",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/auth/check-status",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"check-status"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Test private route",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA4MTNmMWRlLTBjYWUtNGI0Ny1hZjU5LWY3OTNmYTMyOWJhNyIsImlhdCI6MTczMjEwMzEyMywiZXhwIjoxNzMyMTEwMzIzfQ.T1juXUGlP8JPFiHzVPtBvgVdOaI5BW8iO8IhehvfouI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/auth/private",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"private"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Test private route 2",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA4MTNmMWRlLTBjYWUtNGI0Ny1hZjU5LWY3OTNmYTMyOWJhNyIsImlhdCI6MTczMjA5ODQ3MiwiZXhwIjoxNzMyMTA1NjcyfQ.3jUg4_8P43YNrd6SDb23cpWNWKsqz-5GNEplsA-unnU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/auth/private2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"private2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Test private route 3",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA4MTNmMWRlLTBjYWUtNGI0Ny1hZjU5LWY3OTNmYTMyOWJhNyIsImlhdCI6MTczMjExMjQ1MywiZXhwIjoxNzMyMTE5NjUzfQ.bfD1kX6TSuxzSfMVOjX4IRJYE63F4ni4PawbNrl6AhM",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/auth/private3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"private3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update product",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkzNWNiMGRhLTgxY2YtNGNiZC04YTgxLTFhNzYyMDQzYTlhMyIsImlhdCI6MTczMjE3OTQ2MCwiZXhwIjoxNzMyMTg2NjYwfQ.hjo2kEJpiOCQH-2Gw9hu6jPG6T_zgM-W13VNZGqo7oc",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    // \"title\": \"Example shirt new\",\n    \"sizes\": [\n        \"SM\",\n        \"M\",\n        \"L\",\n        \"XXL\"\n    ],\n    // \"slug\":\"Slug's example_shirts3\",\n    \"gender\": \"male\",\n    \"price\": 15.95,\n    \"images\": [\n        \"http://imageNew1.jpg\",\n        \"http://imageNew2.jpg\",\n        \"http://imageNew4.jpg\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/products/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"products",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "c475418a-94b4-4c74-af62-eb4c8721fd30"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Seed",
+					"item": [
+						{
+							"name": "Populate DB",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/seed",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"seed"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "index",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -89,3 +89,4 @@ The course is designed to help you get started in Nest and to improve your skill
   - [Udemy Course - Nest: Desarrollo backend escalable con Node](https://www.udemy.com/course/nest-framework/?kw=nest+desarrollo&src=sac)
   - [Nestjs](https://docs.nestjs.com/)
   - [Recommended installations](https://gist.github.com/Klerith/c0ef4f48d986e2cf3308bb54fff84ea5)
+  - [Publish documentation in Postman](https://learning.postman.com/docs/publishing-your-api/publishing-your-docs/)
