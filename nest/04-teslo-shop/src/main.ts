@@ -21,9 +21,15 @@ async function bootstrap() {
     .setTitle('Teslo shop RESTFul API')
     .setDescription('Teslo shop API description')
     .setVersion('1.0')
+    .addBearerAuth({ type: 'http', scheme: 'bearer', in: 'header' })
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, documentFactory);
+  SwaggerModule.setup('api', app, documentFactory, {
+    swaggerOptions: {
+      tagsSorter: 'alpha', // Order tags alphabetically
+      // operationsSorter: 'alpha', // Order endpoints alphabetically
+    },
+  });
 
   await app.listen(process.env.PORT);
   logger.log(`App running on port ${process.env.PORT}`);

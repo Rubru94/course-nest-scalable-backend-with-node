@@ -62,7 +62,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['sweatshirt'],
       title: 'Men’s Chill Crew Neck Sweatshirt',
-      gender: Gender.MALE,
+      gender: Gender.Male,
     },
     {
       description:
@@ -75,7 +75,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['jacket'],
       title: "Men's Quilted Shirt Jacket",
-      gender: Gender.MALE,
+      gender: Gender.Male,
     },
 
     {
@@ -89,7 +89,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Men's Raven Lightweight Zip Up Bomber Jacket",
-      gender: Gender.MALE,
+      gender: Gender.Male,
     },
 
     {
@@ -103,7 +103,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Men's Turbine Long Sleeve Tee",
-      gender: Gender.MALE,
+      gender: Gender.Male,
     },
     {
       description:
@@ -116,7 +116,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Men's Turbine Short Sleeve Tee",
-      gender: Gender.MALE,
+      gender: Gender.Male,
     },
     {
       description:
@@ -129,7 +129,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Men's Cybertruck Owl Tee",
-      gender: Gender.MALE,
+      gender: Gender.Male,
     },
     {
       description:
@@ -142,7 +142,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Men's Solar Roof Tee",
-      gender: Gender.MALE,
+      gender: Gender.Male,
     },
     {
       description:
@@ -155,7 +155,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Men's Let the Sun Shine Tee",
-      gender: Gender.MALE,
+      gender: Gender.Male,
     },
     {
       description:
@@ -168,7 +168,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Men's 3D Large Wordmark Tee",
-      gender: Gender.MALE,
+      gender: Gender.Male,
     },
     {
       description:
@@ -181,7 +181,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Men's 3D T Logo Tee",
-      gender: Gender.MALE,
+      gender: Gender.Male,
     },
     {
       description:
@@ -194,7 +194,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: 'Men’s 3D Small Wordmark Tee',
-      gender: Gender.MALE,
+      gender: Gender.Male,
     },
     {
       description:
@@ -207,7 +207,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Men's Plaid Mode Tee",
-      gender: Gender.MALE,
+      gender: Gender.Male,
     },
     {
       description:
@@ -220,7 +220,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Men's Powerwall Tee",
-      gender: Gender.MALE,
+      gender: Gender.Male,
     },
     {
       description:
@@ -233,7 +233,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Men's Battery Day Tee",
-      gender: Gender.MALE,
+      gender: Gender.Male,
     },
     {
       description:
@@ -246,7 +246,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: 'Men’s Cybertruck Bulletproof Tee',
-      gender: Gender.MALE,
+      gender: Gender.Male,
     },
     {
       description:
@@ -259,7 +259,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Men's Haha Yes Tee",
-      gender: Gender.MALE,
+      gender: Gender.Male,
     },
     {
       description:
@@ -272,7 +272,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Men's S3XY Tee",
-      gender: Gender.MALE,
+      gender: Gender.Male,
     },
     {
       description:
@@ -285,7 +285,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Men's 3D Wordmark Long Sleeve Tee",
-      gender: Gender.MALE,
+      gender: Gender.Male,
     },
     {
       description:
@@ -298,7 +298,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Men's 3D T Logo Long Sleeve Tee",
-      gender: Gender.MALE,
+      gender: Gender.Male,
     },
     {
       description:
@@ -311,7 +311,7 @@ export const initialData: SeedData = {
       type: 'hoodies',
       tags: ['hoodie'],
       title: "Men's Raven Lightweight Hoodie",
-      gender: Gender.MALE,
+      gender: Gender.Male,
     },
     {
       description:
@@ -324,7 +324,7 @@ export const initialData: SeedData = {
       type: 'hoodies',
       tags: ['hoodie'],
       title: 'Chill Pullover Hoodie',
-      gender: Gender.UNISEX,
+      gender: Gender.Unisex,
     },
     {
       description:
@@ -337,7 +337,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Men's Chill Full Zip Hoodie",
-      gender: Gender.MALE,
+      gender: Gender.Male,
     },
     {
       description:
@@ -350,7 +350,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Men's Chill Quarter Zip Pullover - Gray",
-      gender: Gender.MALE,
+      gender: Gender.Male,
     },
     {
       description:
@@ -363,7 +363,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Men's Chill Quarter Zip Pullover - White",
-      gender: Gender.MALE,
+      gender: Gender.Male,
     },
     {
       description:
@@ -376,7 +376,7 @@ export const initialData: SeedData = {
       type: 'hoodies',
       tags: ['hoodie'],
       title: '3D Large Wordmark Pullover Hoodie',
-      gender: Gender.UNISEX,
+      gender: Gender.Unisex,
     },
     {
       description:
@@ -389,7 +389,7 @@ export const initialData: SeedData = {
       type: 'hoodies',
       tags: ['hoodie'],
       title: 'Cybertruck Graffiti Hoodie',
-      gender: Gender.UNISEX,
+      gender: Gender.Unisex,
     },
     {
       description:
@@ -402,7 +402,7 @@ export const initialData: SeedData = {
       type: 'hats',
       tags: ['hats'],
       title: 'Relaxed T Logo Hat',
-      gender: Gender.UNISEX,
+      gender: Gender.Unisex,
     },
     {
       description:
@@ -415,7 +415,7 @@ export const initialData: SeedData = {
       type: 'hats',
       tags: ['hats'],
       title: 'Thermal Cuffed Beanie',
-      gender: Gender.UNISEX,
+      gender: Gender.Unisex,
     },
     {
       description:
@@ -428,7 +428,7 @@ export const initialData: SeedData = {
       type: 'hoodies',
       tags: ['hoodie'],
       title: "Women's Cropped Puffer Jacket",
-      gender: Gender.FEMALE,
+      gender: Gender.Female,
     },
     {
       description:
@@ -441,7 +441,7 @@ export const initialData: SeedData = {
       type: 'hoodies',
       tags: ['hoodie'],
       title: "Women's Chill Half Zip Cropped Hoodie",
-      gender: Gender.FEMALE,
+      gender: Gender.Female,
     },
     {
       description:
@@ -454,7 +454,7 @@ export const initialData: SeedData = {
       type: 'hoodies',
       tags: ['hoodie'],
       title: "Women's Raven Slouchy Crew Sweatshirt",
-      gender: Gender.FEMALE,
+      gender: Gender.Female,
     },
     {
       description:
@@ -467,7 +467,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Women's Turbine Cropped Long Sleeve Tee",
-      gender: Gender.FEMALE,
+      gender: Gender.Female,
     },
     {
       description:
@@ -480,7 +480,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Women's Turbine Cropped Short Sleeve Tee",
-      gender: Gender.FEMALE,
+      gender: Gender.Female,
     },
     {
       description:
@@ -493,7 +493,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Women's T Logo Short Sleeve Scoop Neck Tee",
-      gender: Gender.FEMALE,
+      gender: Gender.Female,
     },
     {
       description:
@@ -506,7 +506,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Women's T Logo Long Sleeve Scoop Neck Tee",
-      gender: Gender.FEMALE,
+      gender: Gender.Female,
     },
     {
       description:
@@ -519,7 +519,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Women's Small Wordmark Short Sleeve V-Neck Tee",
-      gender: Gender.FEMALE,
+      gender: Gender.Female,
     },
     {
       description:
@@ -532,7 +532,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Women's Large Wordmark Short Sleeve Crew Neck Tee",
-      gender: Gender.FEMALE,
+      gender: Gender.Female,
     },
     {
       description:
@@ -545,7 +545,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Women's Plaid Mode Tee",
-      gender: Gender.FEMALE,
+      gender: Gender.Female,
     },
     {
       description:
@@ -558,7 +558,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: 'Women’s Powerwall Tee',
-      gender: Gender.FEMALE,
+      gender: Gender.Female,
     },
     {
       description:
@@ -571,7 +571,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Women's Corp Jacket",
-      gender: Gender.FEMALE,
+      gender: Gender.Female,
     },
     {
       description:
@@ -584,7 +584,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: "Women's Raven Joggers",
-      gender: Gender.FEMALE,
+      gender: Gender.Female,
     },
     {
       description:
@@ -597,7 +597,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: 'Kids Cybertruck Long Sleeve Tee',
-      gender: Gender.KID,
+      gender: Gender.Kid,
     },
     {
       description:
@@ -610,7 +610,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: 'Kids Scribble T Logo Tee',
-      gender: Gender.KID,
+      gender: Gender.Kid,
     },
     {
       description:
@@ -623,7 +623,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: 'Kids Cybertruck Tee',
-      gender: Gender.KID,
+      gender: Gender.Kid,
     },
     {
       description:
@@ -636,7 +636,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: 'Kids Racing Stripe Tee',
-      gender: Gender.KID,
+      gender: Gender.Kid,
     },
     {
       description:
@@ -649,7 +649,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: 'Kids 3D T Logo Tee',
-      gender: Gender.KID,
+      gender: Gender.Kid,
     },
     {
       description:
@@ -662,7 +662,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: 'Kids Checkered Tee',
-      gender: Gender.KID,
+      gender: Gender.Kid,
     },
     {
       description:
@@ -675,7 +675,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: 'Made on Earth by Humans Onesie',
-      gender: Gender.KID,
+      gender: Gender.Kid,
     },
     {
       description:
@@ -688,7 +688,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: 'Scribble T Logo Onesie',
-      gender: Gender.KID,
+      gender: Gender.Kid,
     },
     {
       description:
@@ -701,7 +701,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: 'Zero Emissions (Almost) Onesie',
-      gender: Gender.KID,
+      gender: Gender.Kid,
     },
     {
       description:
@@ -714,7 +714,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: 'Kids Cyberquad Bomber Jacket',
-      gender: Gender.KID,
+      gender: Gender.Kid,
     },
     {
       description:
@@ -727,7 +727,7 @@ export const initialData: SeedData = {
       type: 'shirts',
       tags: ['shirt'],
       title: 'Kids Corp Jacket',
-      gender: Gender.KID,
+      gender: Gender.Kid,
     },
   ],
 };

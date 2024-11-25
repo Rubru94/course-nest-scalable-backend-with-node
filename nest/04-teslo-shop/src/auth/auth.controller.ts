@@ -3,41 +3,91 @@ import {
   Controller,
   Get,
   Headers,
+  HttpCode,
+  HttpStatus,
   Post,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { IncomingHttpHeaders } from 'http';
 import { AuthService } from './auth.service';
 import { Auth, GetUser, RawHeaders, RoleProtected } from './decorators';
-import { CreateUserDto, LoginUserDto } from './dto';
+import { AuthenticatedUser, CreateUserDto, LoginUserDto } from './dto';
 import { User } from './entities/user.entity';
 import { ValidRole } from './enums/valid-role.enum';
 import { UserRoleGuard } from './guards/user-role.guard';
 
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  @ApiResponse({
+    status: 201,
+    description: 'User created',
+    type: AuthenticatedUser,
+  })
+  @ApiResponse({
+    example: {
+      message: ['email must be an email', 'email must be a string'],
+      error: 'Bad Request',
+      statusCode: 400,
+    },
+    status: 400,
+    description: 'Bad request',
+  })
   @Post('register')
-  registerUser(@Body() createUserDto: CreateUserDto) {
+  registerUser(
+    @Body() createUserDto: CreateUserDto,
+  ): Promise<AuthenticatedUser> {
     return this.authService.registerUser(createUserDto);
   }
 
+  @ApiResponse({
+    status: 200,
+    description: 'User logged',
+    type: AuthenticatedUser,
+  })
+  @ApiResponse({
+    example: {
+      message: ['email must be an email', 'email must be a string'],
+      error: 'Bad Request',
+      statusCode: 400,
+    },
+    status: 400,
+    description: 'Bad request',
+  })
   @Post('login')
-  login(@Body() loginUserDto: LoginUserDto) {
+  @HttpCode(HttpStatus.OK)
+  login(@Body() loginUserDto: LoginUserDto): Promise<AuthenticatedUser> {
     return this.authService.login(loginUserDto);
   }
 
+  @ApiResponse({
+    status: 200,
+    description: 'User status obtained',
+    type: AuthenticatedUser,
+  })
+  @ApiResponse({
+    example: {
+      message: 'Unauthorized',
+      statusCode: 401,
+    },
+    status: 401,
+    description: 'Unauthorized',
+  })
+  @ApiBearerAuth()
   @Get('check-status')
   @Auth()
-  checkAuthStatus(@GetUser() user: User) {
+  checkAuthStatus(@GetUser() user: User): Promise<AuthenticatedUser> {
     return this.authService.checkAuthStatus(user);
   }
 
   /**
    * Route with authentication only.
    */
+  @ApiBearerAuth()
   @Get('private')
   @UseGuards(AuthGuard()) // By default AuthGuard use JwtStrategy validations
   testingPrivateRoute(
@@ -68,6 +118,7 @@ export class AuthController {
   /**
    * Route with authentication & authorization.
    */
+  @ApiBearerAuth()
   @Get('private2')
   // @SetMetadata('roles', ['admin', 'super-user'])
   @RoleProtected(ValidRole.SuperUser, ValidRole.Admin)
@@ -84,6 +135,7 @@ export class AuthController {
   /**
    * Route with authentication & authorization using decorator composition (https://docs.nestjs.com/custom-decorators#decorator-composition).
    */
+  @ApiBearerAuth()
   @Get('private3')
   @Auth(ValidRole.SuperUser, ValidRole.Admin)
   testingPrivateRoute3(@GetUser() user: User) {

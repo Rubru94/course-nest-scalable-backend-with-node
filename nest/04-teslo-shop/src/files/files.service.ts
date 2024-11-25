@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { existsSync } from 'fs';
 import { join } from 'path';
 
@@ -8,7 +8,7 @@ export class FilesService {
     const path = join(__dirname, '../../static/products', name);
 
     if (!existsSync(path))
-      throw new BadRequestException(`Product image ${name} not found`);
+      throw new NotFoundException(`Product image ${name} not found`);
 
     return path;
   }

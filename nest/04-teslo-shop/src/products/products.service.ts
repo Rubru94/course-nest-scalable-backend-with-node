@@ -91,7 +91,11 @@ export class ProductsService {
     return new PlainProductDto(product);
   }
 
-  async update(id: string, updateProductDto: UpdateProductDto, user: User) {
+  async update(
+    id: string,
+    updateProductDto: UpdateProductDto,
+    user: User,
+  ): Promise<PlainProductDto> {
     const { images, ...rest } = updateProductDto;
 
     const productImages = await this.productImageRepository.findBy({

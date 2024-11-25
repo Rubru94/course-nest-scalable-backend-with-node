@@ -10,14 +10,23 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { FileInterceptor } from '@nestjs/platform-express';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiConsumes,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Response } from 'express';
 import { diskStorage } from 'multer';
 import { Auth } from '../auth/decorators';
 import { ValidRole } from '../auth/enums/valid-role.enum';
 import { ImageExtension } from '../common/enums';
+import { FileUploadDto, UploadedImageDto } from './dtos';
 import { FilesService } from './files.service';
 import { imageFileFilter, imageFileNamer } from './helpers';
 
+@ApiTags('Files')
 @Controller('files')
 export class FilesController {
   constructor(
@@ -25,6 +34,34 @@ export class FilesController {
     private readonly filesService: FilesService,
   ) {}
 
+  @ApiResponse({
+    status: 201,
+    description: 'Image uploaded',
+    type: UploadedImageDto,
+  })
+  @ApiResponse({
+    example: {
+      message: 'File must be a valid image (jpg,jpeg,png,svg,gif)',
+      error: 'Bad Request',
+      statusCode: 400,
+    },
+    status: 400,
+    description: 'Bad Request',
+  })
+  @ApiResponse({
+    example: {
+      message: 'Unauthorized',
+      statusCode: 401,
+    },
+    status: 401,
+    description: 'Unauthorized',
+  })
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'Image file',
+    type: FileUploadDto,
+  })
+  @ApiBearerAuth()
   @Post('product')
   @Auth(ValidRole.Admin)
   @UseInterceptors(
@@ -37,7 +74,10 @@ export class FilesController {
       }),
     }),
   )
-  uploadProductImage(@UploadedFile() file: Express.Multer.File) {
+  uploadProductImage(
+    @UploadedFile()
+    file: Express.Multer.File,
+  ): UploadedImageDto {
     // console.log({ fileInController: file });
 
     if (!file)
@@ -50,11 +90,24 @@ export class FilesController {
     return { secureUrl };
   }
 
+  @ApiResponse({
+    status: 200,
+    description: 'Image found',
+  })
+  @ApiResponse({
+    example: {
+      message: 'Product image 1473809-00-A_1_2000_0.jpg not found',
+      error: 'Not Found',
+      statusCode: 404,
+    },
+    status: 404,
+    description: 'Not Found',
+  })
   @Get('product/:imageName')
   findProductImage(
     @Res() res: Response, // Handle response with express way. This causes certain steps in nestjs lifecycle to be skipped (e.g. interceptors).
     @Param('imageName') imageName: string,
-  ) {
+  ): void {
     res.status(200).sendFile(this.filesService.findProductImagePath(imageName));
   }
 }

@@ -112,4 +112,8 @@ $ npm run test:cov
 - [Klerith/nest-teslo-shop - Relationships TypeORM](https://github.com/Klerith/nest-teslo-shop/tree/fin-seccion-11)
 - [Klerith/nest-teslo-shop - File upload](https://github.com/Klerith/nest-teslo-shop/tree/fin-seccion-12)
 - [nestjs - File upload](https://docs.nestjs.com/techniques/file-upload)
+- [Klerith/nest-teslo-shop - Authentication & authorization](https://github.com/Klerith/nest-teslo-shop/tree/fin-seccion-13)
+- [nestjs - Swagger - openapi](https://docs.nestjs.com/openapi/introduction)
+- [5 tips for better Swagger docs in NestJS](https://dev.to/antoncodes/5-tips-for-better-swagger-docs-in-nestjs-ng9)
+- [Klerith/nest-teslo-shop - Swagger - openapi](https://github.com/Klerith/nest-teslo-shop/tree/fin-seccion-14)
 

@@ -4,11 +4,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { DeleteResult, Repository } from 'typeorm';
 import { handleDBException } from '../common/handlers/error.handler';
-import { CreateUserDto, LoginUserDto } from './dto';
+import { AuthenticatedUser, CreateUserDto, LoginUserDto } from './dto';
 import { User } from './entities/user.entity';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
-
-type AuthenticatedUser = Partial<User> & { token: string };
 
 @Injectable()
 export class AuthService {
