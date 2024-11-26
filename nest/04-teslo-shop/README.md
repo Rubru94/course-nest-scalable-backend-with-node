@@ -116,4 +116,5 @@ $ npm run test:cov
 - [nestjs - Swagger - openapi](https://docs.nestjs.com/openapi/introduction)
 - [5 tips for better Swagger docs in NestJS](https://dev.to/antoncodes/5-tips-for-better-swagger-docs-in-nestjs-ng9)
 - [Klerith/nest-teslo-shop - Swagger - openapi](https://github.com/Klerith/nest-teslo-shop/tree/fin-seccion-14)
+- [nestjs - Websocket Gateways](https://docs.nestjs.com/websockets/gateways)
 
