@@ -13,6 +13,7 @@ const addListeners = (socket: Socket) => {
   // socket.emit // emit to server
 
   const serverStatusLabel = document.querySelector("#server-status")!; // ! will always have value
+  const clientsList = document.querySelector("#clients-ul")!; // ! will always have value
 
   socket.on("connect", () => {
     serverStatusLabel.innerHTML = "connected";
@@ -20,5 +21,12 @@ const addListeners = (socket: Socket) => {
 
   socket.on("disconnect", () => {
     serverStatusLabel.innerHTML = "disconnected";
+  });
+
+  socket.on("clients-updated", (clients: string[]) => {
+    const ids = clients
+      .map((clientId: string) => `<li>${clientId}</li>`)
+      .join("");
+    clientsList.innerHTML = ids;
   });
 };

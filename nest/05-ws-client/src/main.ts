@@ -6,7 +6,13 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     <h1>Websocket - Client</h1>
 
     <span id="server-status"></span>
-  </div>
+  
+    <div class="clients">
+      <h3>Users:</h3>
+      <ul id="clients-ul"></ul>
+    </div>
+  
+    </div>
 `;
 
 connectToServer();
