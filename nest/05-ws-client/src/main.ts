@@ -17,8 +17,13 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
       <br/><br/>
       <button type="submit">Send</button> 
     </form>
-  
+
+    <div class="messages">
+      <h3>Messages:</h3>
+      <ul id="messages-ul"></ul>
     </div>
+  
+  </div>
 `;
 
 connectToServer();
