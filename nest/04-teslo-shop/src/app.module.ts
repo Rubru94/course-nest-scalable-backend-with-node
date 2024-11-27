@@ -8,10 +8,17 @@ import { FilesModule } from './files/files.module';
 import { AuthModule } from './auth/auth.module';
 import { MessagesWsModule } from './messages-ws/messages-ws.module';
 
+const PRODUCTION_STAGE = 'prod';
+const isProd = process.env.STAGE === PRODUCTION_STAGE;
+
 @Module({
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
+      ssl: isProd,
+      extra: {
+        ssl: isProd ? { rejectUnauthorized: false } : null,
+      },
       type: 'postgres',
       host: process.env.DB_HOST,
       port: Number(process.env.DB_PORT),
