@@ -1,7 +1,12 @@
 import { Manager, Socket } from "socket.io-client";
 
-export const connectToServer = () => {
-  const manager = new Manager(import.meta.env.VITE_SOCKET_URI);
+export const connectToServer = (token: string) => {
+  const manager = new Manager(import.meta.env.VITE_SOCKET_URI, {
+    extraHeaders: {
+      foo: "foo",
+      authentication: token,
+    },
+  });
   const socket = manager.socket("/");
   console.log(socket);
 
