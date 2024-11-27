@@ -1,3 +1,4 @@
+import { JwtService } from '@nestjs/jwt';
 import {
   OnGatewayConnection,
   OnGatewayDisconnect,
@@ -6,10 +7,9 @@ import {
   WebSocketServer,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
+import { JwtPayload } from 'src/auth/interfaces/jwt-payload.interface';
 import { NewMessageDto } from './dtos/new-message.dto';
 import { MessagesWsService } from './messages-ws.service';
-import { JwtService } from '@nestjs/jwt';
-import { JwtPayload } from 'src/auth/interfaces/jwt-payload.interface';
 
 /**
  *  @info Websocket concepts
@@ -24,23 +24,20 @@ export class MessagesWsGateway
 
   constructor(
     private readonly messagesWsService: MessagesWsService,
-    private readonly jwtService: JwtService,
+    private readonly jwtService: JwtService, // We can also handle jwt logic into auth.service & inject it here
   ) {}
 
-  handleConnection(client: Socket) {
-    // console.log(`Client connected: ${client.id}`);
-    // console.log({ extraHeaders: client.handshake.headers });
+  async handleConnection(client: Socket) {
     const token = client.handshake.headers.authentication as string;
     let payload: JwtPayload;
+
     try {
       payload = this.jwtService.verify(token);
+      await this.messagesWsService.registerClient(client, payload.id);
     } catch (error) {
       client.disconnect();
       return;
     }
-    console.log({ payload });
-
-    this.messagesWsService.registerClient(client);
     this.emitClientsUpdated();
   }
 
@@ -53,7 +50,7 @@ export class MessagesWsGateway
   private emitClientsUpdated(): void {
     this.wss.emit(
       'clients-updated',
-      this.messagesWsService.getConnectedClients(),
+      this.messagesWsService.getConnectedClientsKeys(),
     );
   }
 
@@ -75,6 +72,9 @@ export class MessagesWsGateway
     /**
      * This way it is issued to everyone.
      */
-    this.wss.emit('messages-from-server', payload);
+    this.wss.emit('messages-from-server', {
+      fullName: this.messagesWsService.getUserFullName(client.id),
+      message: payload.message || 'No message...',
+    });
   }
 }

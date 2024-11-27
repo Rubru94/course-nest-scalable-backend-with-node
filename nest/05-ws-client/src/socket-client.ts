@@ -47,7 +47,7 @@ const addListeners = (socket: Socket) => {
     if (messageInput.value.trim().length <= 0) return;
 
     socket.emit("message-from-client", {
-      fullName: "Me",
+      anyKey: "Me!",
       message: messageInput.value,
     });
     messageInput.value = "";
@@ -56,10 +56,9 @@ const addListeners = (socket: Socket) => {
   socket.on(
     "messages-from-server",
     (payload: { fullName: string; message: string }) => {
-      /* console.log({ payload }); */
       const newMessage = `
         <li>
-            <strong>${payload.fullName}</strong>
+            <strong>${payload.fullName}: </strong>
             <span>${payload.message}</span>
         </li>
       `;
