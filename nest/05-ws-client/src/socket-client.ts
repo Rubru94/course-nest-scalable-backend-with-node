@@ -1,5 +1,7 @@
 import { Manager, Socket } from "socket.io-client";
 
+let socket: Socket;
+
 export const connectToServer = (token: string) => {
   const manager = new Manager(import.meta.env.VITE_SOCKET_URI, {
     extraHeaders: {
@@ -7,13 +9,13 @@ export const connectToServer = (token: string) => {
       authentication: token,
     },
   });
-  const socket = manager.socket("/");
-  console.log(socket);
+  socket?.removeAllListeners();
+  socket = manager.socket("/");
 
-  addListeners(socket);
+  addListeners();
 };
 
-const addListeners = (socket: Socket) => {
+const addListeners = () => {
   // socket.on // listen to server
   // socket.emit // emit to server
 
