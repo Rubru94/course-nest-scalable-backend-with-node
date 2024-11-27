@@ -76,6 +76,7 @@ export class ProductsService {
           },
         )
         .leftJoinAndSelect('prod.images', 'prodImages') // Eager relations only work when you use find* methods. If you use QueryBuilder eager relations are disabled and have to use leftJoinAndSelect to load the relation.
+        .leftJoinAndSelect('prod.user', 'prodUser')
         .getOne();
     }
 
