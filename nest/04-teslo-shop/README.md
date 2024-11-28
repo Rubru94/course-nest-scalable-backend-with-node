@@ -97,6 +97,10 @@ $ npm run test:cov
    POST: http://localhost:3000/api/seed
    ```
 
+## Prod deployment
+
+- [https://teslo-shop-backend-production.up.railway.app](https://teslo-shop-backend-production.up.railway.app)
+
 ## Stack
 
 - PostgreSQL

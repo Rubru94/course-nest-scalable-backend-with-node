@@ -51,6 +51,10 @@ $ npm install
 $ npm run dev
 ```
 
+## Prod deployment
+
+- [https://teslo-shop-client-ws-vite-gca4lwkaq-rubru94s-projects.vercel.app](https://teslo-shop-client-ws-vite-gca4lwkaq-rubru94s-projects.vercel.app)
+
 ## Bibliography
 
 - [Klerith/nest-teslo-shop-front](https://github.com/Klerith/-nest-teslo-shop-front)
