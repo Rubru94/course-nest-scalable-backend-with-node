@@ -8,6 +8,7 @@ import { handleDBException } from '../common/handlers/error.handler';
 import { getRandomInt } from '../common/helpers/random.helper';
 import { CreateProductDto, PlainProductDto, UpdateProductDto } from './dto';
 import { Product, ProductImage } from './entities';
+
 @Injectable()
 export class ProductsService {
   private readonly logger = new Logger('ProductsService');

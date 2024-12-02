@@ -9,7 +9,7 @@ import {
   IsString,
   MinLength,
 } from 'class-validator';
-import { Gender } from 'src/common/enums';
+import { Gender } from '../../common/enums';
 
 export class CreateProductDto {
   @ApiProperty({
